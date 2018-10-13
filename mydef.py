@@ -39,3 +39,12 @@ def G(a,b):
 
 def Gg(a,b,X):
     return np.matmul(inv(G(a,b)),g(a,b,X))
+
+def mom(X):
+    x = (np.sum(X)) / len(X)
+    S = np.std(X)
+    a = x * ((x * (1 - x)) / (S * S) - 1)
+    b = (1 - x) * ((x * (1 - x) / (S * S)) - 1)
+
+    return [[a], [b]];
+
