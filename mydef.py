@@ -28,14 +28,16 @@ def g1(a,b,xx):
     return value;
 
 def g2(a,b,xx):
-    value = digamma(b) - digamma(a+b) - ((np.sum(np.log(np.subtract(1,xx))))/len(xx))
-    return value;
+    g2 = digamma(b) - digamma(a+b) - ((np.sum(np.log(np.subtract(1,xx))))/len(xx))
+    return g2;
 
 def g(a,b,x):
-    return [[g1(a,b,x)],[ g2(a,b,x)]]
+    g= [[g1(a,b,x)],[ g2(a,b,x)]]
+    return g
 
 def G(a,b):
-    return [[dg1da(a,b),dg1db(a,b)],[dg2da(a,b),dg2db(a,b)]];
+     G = [[dg1da(a,b),dg1db(a,b)],[dg2da(a,b),dg2db(a,b)]]
+     return G
 
 def Gg(a,b,X):
     return np.matmul(inv(G(a,b)),g(a,b,X))

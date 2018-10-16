@@ -16,27 +16,25 @@ Y1 = arctic['sand']
 Y2 = arctic['silt']
 Y3 = arctic['clay']
 X = arctic['depth']
-Y = [[Y1],[Y2],[Y3]]
-a = [0] * 3
-c = [0] * 3
-r = [0] * 3
-e = [0] * 3
+
+a = np.zeros(3)
+c = np.zeros(3)
+r = np.zeros(3)
+e = np.zeros(3)
 i=2
-print(a[i]," ",c[i],"    ",r[i]," ",e[i])
-anew = [0] * 3
-cnew = [0] * 3
+print(a[i]," ",c[i],"\n",r[i]," ",e[i])
+anew = a
+cnew = c
 [[a[i]],[c[i]]]= mydef.mom(Y3)
-print(anew[i]," ",cnew[i],"\n")
+mom = np.vectorize(mydef.mom,cache=False)
+list(mom(Y3))
+print(a[i]," ",c[i],"\n")
 count = 0
 while 1:
-  [[r[i]],[e[i]]] = mydef.Gg(a[i],c[i],Y3)
+  [[r[i]],[e[i]]] = mydef.Gg(a[i],c[i],Y1)
   #[[a1],[c1]] = [[a1],[c1]] - [[r1],[e1]]
-  print(a[i]," ",c[i],"   ",r[i]," ",e[i])
-  mya = a[i]
-  myc = c[i]
-  anew[i] = mya - r[i]
-  cnew[i] = myc - e[i]
-  print(a[i]," ",c[i],"   ",r[i]," ",e[i])
+  anew[i] = a[i] - r[i]
+  cnew[i] = c[i] - e[i]
   print("count is ",count,"\n")
   count += 1
   if (anew[i] <= 0 or cnew[i]<= 0 or abs(r[i]) < 0.01 or abs(e[i]) < 0.01) :
@@ -46,9 +44,7 @@ while 1:
   c[i] = cnew[i]
   print("div")
 
-print(a[i]," ",c[i],"   ",r[i]," ",e[i])
-print("y1",np.average(Y1))
-print("y2",np.average(Y2))
-print("y3",np.average(Y3))
+print(a[i]," ",c[i],"\n",r[i]," ",e[i])
 
-#print(Y[i],Y3)
+
+print("Divya21")
